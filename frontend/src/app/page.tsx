@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useRouter } from "next/navigation";
 
 type Note = {
   id: string;
@@ -42,6 +43,19 @@ export default function Home() {
     Personal: "bg-yellow-200 text-yellow-800",
     Other: "bg-yellow-200 text-yellow-800",
   };
+  const router = useRouter();
+
+  function logout() {
+  localStorage.removeItem("token");
+  localStorage.removeItem("userId");
+  router.push("/login");
+}
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    const userId = localStorage.getItem("userId");
+    if (!token || !userId) router.push("/login");
+  }, []);
 
   useEffect(() => {
     loadNotes();
@@ -49,7 +63,11 @@ export default function Home() {
 
   async function loadNotes() {
     try {
-      const res = await fetch(`${backend}/notes`);
+      const token = localStorage.getItem("token");
+      const userId = localStorage.getItem("userId");
+      const res = await fetch(`${backend}/notes`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
       const data = await res.json();
       setNotes(data);
     } catch {
@@ -74,12 +92,16 @@ export default function Home() {
     if (!title.trim()) return pushToast("Enter a title", "error");
 
     try {
+      const token = localStorage.getItem("token");
+
       const res = await fetch(`${backend}/notes`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
         body: JSON.stringify({ title, content, category }),
       });
-
       const newNote = await res.json();
       setNotes((prev) => [newNote, ...prev]);
       setTitle("");
@@ -404,6 +426,13 @@ export default function Home() {
             {t.message}
           </motion.div>
         ))}
+
+         <button
+      onClick={logout}
+      className="px-4 py-2 bg-red-500 text-white rounded-lg shadow hover:bg-red-600"
+    >
+      Logout
+    </button>
       </div>
     </main>
   );
