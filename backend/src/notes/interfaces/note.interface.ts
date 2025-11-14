@@ -3,6 +3,7 @@ export interface Note {
   title: string;
   content?: string;
   createdAt: string;
-    isPinned?: boolean;
-    category?: string;
+  isPinned?: boolean;
+  category?: string;
+  userId: string;
 }

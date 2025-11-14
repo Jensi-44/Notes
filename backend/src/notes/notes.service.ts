@@ -13,8 +13,7 @@ export class NotesService {
   private logger = new Logger(NotesService.name);
 
   constructor() {
-  
-    this.loadFromFile().catch(err => {
+    this.loadFromFile().catch((err) => {
       this.logger.error('Failed to load notes.json', err);
     });
   }
@@ -24,19 +23,31 @@ export class NotesService {
       const raw = await fs.readFile(this.dataPath, 'utf-8');
       this.notes = JSON.parse(raw) as Note[];
     } catch (err) {
-  
       this.notes = [];
-      await this.saveToFile(); 
+      await this.saveToFile();
     }
   }
 
   private async saveToFile() {
     await fs.mkdir(join(process.cwd(), 'data'), { recursive: true });
-    await fs.writeFile(this.dataPath, JSON.stringify(this.notes, null, 2), 'utf-8');
+    await fs.writeFile(
+      this.dataPath,
+      JSON.stringify(this.notes, null, 2),
+      'utf-8',
+    );
   }
 
-  findAll(): Note[] {
-    return [...this.notes].sort((a, b) => {
+  // GET ALL NOTES OF A USER
+  findAll(userId?: string): Note[] {
+    let list = this.notes;
+
+    // Filter by user ID
+    if (userId) {
+      list = list.filter((n) => n.userId === userId);
+    }
+
+    // Sort: pinned first, then newest
+    return [...list].sort((a, b) => {
       if ((b.isPinned ? 1 : 0) - (a.isPinned ? 1 : 0) !== 0) {
         return (b.isPinned ? 1 : 0) - (a.isPinned ? 1 : 0);
       }
@@ -44,7 +55,8 @@ export class NotesService {
     });
   }
 
-  async create(dto: CreateNoteDto): Promise<Note> {
+  // CREATE
+  async create(dto: CreateNoteDto, userId: string): Promise<Note> {
     const note: Note = {
       id: uuidv4(),
       title: dto.title,
@@ -52,24 +64,19 @@ export class NotesService {
       createdAt: new Date().toISOString(),
       isPinned: !!dto.isPinned,
       category: dto.category || 'Other',
-
+      userId,
     };
+
     this.notes.push(note);
     await this.saveToFile();
     return note;
   }
 
-  async remove(id: string): Promise<{ deleted: boolean }> {
-    const index = this.notes.findIndex(n => n.id === id);
-    if (index === -1) throw new NotFoundException('Note not found');
-    this.notes.splice(index, 1);
-    await this.saveToFile();
-    return { deleted: true };
-  }
-
-  async update(id: string, dto: UpdateNoteDto): Promise<Note> {
-    const note = this.notes.find(n => n.id === id);
+  // UPDATE
+  async update(id: string, dto: UpdateNoteDto, userId: string): Promise<Note> {
+    const note = this.notes.find((n) => n.id === id && n.userId === userId);
     if (!note) throw new NotFoundException('Note not found');
+
     if (dto.title !== undefined) note.title = dto.title;
     if (dto.content !== undefined) note.content = dto.content;
     if (dto.isPinned !== undefined) note.isPinned = dto.isPinned;
@@ -77,5 +84,18 @@ export class NotesService {
 
     await this.saveToFile();
     return note;
+  }
+
+  // DELETE
+  async remove(id: string, userId: string) {
+    const index = this.notes.findIndex(
+      (n) => n.id === id && n.userId === userId,
+    );
+    if (index === -1) throw new NotFoundException('Note not found');
+
+    this.notes.splice(index, 1);
+    await this.saveToFile();
+
+    return { deleted: true };
   }
 }
