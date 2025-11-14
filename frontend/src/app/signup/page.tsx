@@ -22,7 +22,8 @@ export default function SignupPage() {
     if (res.ok) {
       router.push("/login");
     } else {
-      alert("User Already Exists!!!!!!!");
+      const errorData = await res.json();
+      alert(errorData.message || "Signup failed");
     }
   }
 

@@ -1,0 +1,14 @@
+[
+  {
+    "id": "18360bf3-1e2b-4c59-a26d-6df4cce03916",
+    "email": "yashvipshah80@gmail.com",
+    "password": "$2b$10$/8W1Jtv/49MFKsPU6A7Arul7CDoV8MEtmhB161BEuC8LjSowh3nhC",
+    "createdAt": "2025-11-14T11:02:40.877Z"
+  },
+  {
+    "id": "549abe34-33ff-4e18-8ace-06a7106b2faf",
+    "email": "jensi@gmail.com",
+    "password": "$2b$10$se/nxCHHhJW8B41qwsvKYObEvdvaTq1cCrr2Y6Qf02ZXbU.A.x37u",
+    "createdAt": "2025-11-14T11:25:41.311Z"
+  }
+]
