@@ -23,7 +23,8 @@ export default function LoginPage() {
       localStorage.setItem("userId", data.user.id);
       router.push("/");
     } else {
-      alert("Login failed");
+      const errorData = await res.json();
+      alert(errorData.message || "Login failed");
     }
   }
 
@@ -31,11 +32,13 @@ export default function LoginPage() {
     <div className="flex items-center justify-center min-h-screen bg-yellow-50">
       <div className="bg-white p-10 rounded-2xl shadow-xl w-full max-w-md border border-yellow-200">
         <h2 className="text-3xl font-bold text-gray-800 text-center mb-6">
+<<<<<<< HEAD
           Welcome Back 👋
+=======
+          Welcome Back
+>>>>>>> 7a3cd9cdc4e2c4ba97ec03aee0296bb33603a26a
         </h2>
-        <p className="text-center text-gray-500 mb-8">
-          Login to continue
-        </p>
+        <p className="text-center text-gray-500 mb-8">Login to continue</p>
 
         <form onSubmit={submit} className="space-y-5">
           {/* Email */}
@@ -77,7 +80,10 @@ export default function LoginPage() {
 
         <p className="text-center mt-6 text-gray-600">
           Don’t have an account?{" "}
-          <a href="/signup" className="text-yellow-600 font-semibold hover:underline">
+          <a
+            href="/signup"
+            className="text-yellow-600 font-semibold hover:underline"
+          >
             Sign up
           </a>
         </p>

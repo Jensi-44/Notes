@@ -22,7 +22,12 @@ export default function SignupPage() {
     if (res.ok) {
       router.push("/login");
     } else {
+<<<<<<< HEAD
       alert("Signup failed");
+=======
+      const errorData = await res.json();
+      alert(errorData.message || "Signup failed");
+>>>>>>> 7a3cd9cdc4e2c4ba97ec03aee0296bb33603a26a
     }
   }
 
