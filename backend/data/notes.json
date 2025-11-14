@@ -1,0 +1,50 @@
+[
+  {
+    "id": "d59df062-5605-4d9b-af97-a872d5644188",
+    "title": "Chapter 1",
+    "content": "ABCD",
+    "createdAt": "2025-11-14T07:16:02.572Z",
+    "isPinned": true,
+    "category": "Study"
+  },
+  {
+    "id": "3155545e-cbb3-4bb1-b5a8-bc62c8c68771",
+    "title": "Chapter 2",
+    "content": "XYZZ....",
+    "createdAt": "2025-11-14T07:16:24.296Z",
+    "isPinned": false,
+    "category": "Study"
+  },
+  {
+    "id": "9deadb73-82b1-431e-a88a-b0adebcfb253",
+    "title": "Office",
+    "content": "Presentation.....",
+    "createdAt": "2025-11-14T07:16:45.922Z",
+    "isPinned": false,
+    "category": "Work"
+  },
+  {
+    "id": "0f542268-fac9-4d7b-933b-fedf51a4ce3e",
+    "title": "Company",
+    "content": "ABCD....",
+    "createdAt": "2025-11-14T07:17:00.140Z",
+    "isPinned": true,
+    "category": "Work"
+  },
+  {
+    "id": "4f8a2926-af45-4ef6-8144-cf249774d493",
+    "title": "House",
+    "content": "Price...",
+    "createdAt": "2025-11-14T07:17:19.925Z",
+    "isPinned": true,
+    "category": "Personal"
+  },
+  {
+    "id": "19381fe8-37e5-448b-a93c-6de55c9261f3",
+    "title": "Car",
+    "content": "Xyzzz...",
+    "createdAt": "2025-11-14T07:17:32.352Z",
+    "isPinned": false,
+    "category": "Personal"
+  }
+]
