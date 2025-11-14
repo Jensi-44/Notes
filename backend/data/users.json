@@ -1,0 +1,26 @@
+[
+  {
+    "id": "faf91a9b-935b-43f7-8bd1-0aa9197ecf80",
+    "email": "jensi4@gmail.com",
+    "password": "$2b$10$FpAT9XAzLYQTuHe1oPDc4ONtqKaAE0ez4xhIADvtiUwtwac/WDQsq",
+    "createdAt": "2025-11-14T11:36:16.191Z"
+  },
+  {
+    "id": "c455aaf6-2b5f-4fe8-a371-95251e3dba57",
+    "email": "jensi43@gmail.com",
+    "password": "$2b$10$GNm6LWRfUguBBbHu1g2tGOAQ2ZoTbRO.UVEhYZ42GGYY1KUGMk3i2",
+    "createdAt": "2025-11-14T11:38:39.523Z"
+  },
+  {
+    "id": "de1fafb5-642b-4dff-beea-ae264040eed2",
+    "email": "jensi41@gmail",
+    "password": "$2b$10$PwWMUg70bbPZviWUBhxbJ.N6NFSDUvM.4p1LLOPkxsZwYtmBAZGAC",
+    "createdAt": "2025-11-14T11:41:49.544Z"
+  },
+  {
+    "id": "7115de4b-e485-4d7a-9a1d-1837e1763644",
+    "email": "jensi.kachhadiya119454@marwadiuniversity.ac.in",
+    "password": "$2b$10$uDj1gkq8YrgV1G/ARtkXDuSswyg4O/e/1rDVnhwPh/d5y/TznHF.i",
+    "createdAt": "2025-11-14T11:57:54.735Z"
+  }
+]

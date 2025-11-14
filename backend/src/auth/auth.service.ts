@@ -15,7 +15,7 @@ import { User } from './interfaces/user.interface';
 export class AuthService {
   private dataPath = join(process.cwd(), 'data', 'users.json');
   private users: User[] = [];
-  private jwtSecret = process.env.JWT_SECRET || ''; 
+  private jwtSecret = process.env.JWT_SECRET || 'JWT_SECRET'; 
 
   constructor() {
     this.loadFromFile().catch(() => this.saveToFile());

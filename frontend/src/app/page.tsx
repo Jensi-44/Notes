@@ -134,46 +134,69 @@ export default function Home() {
     setEditingId(null);
   }
 
-  async function saveEdit() {
-    if (!editingId) return;
+async function saveEdit() {
+  if (!editingId) return;
 
-    try {
-      const res = await fetch(`${backend}/notes/${editingId}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          title: editTitle,
-          content: editContent,
-          category: editCategory,
-        }),
-      });
+  try {
+    const token = localStorage.getItem("token");
 
-      const updated = await res.json();
-      setNotes((prev) => prev.map((n) => (n.id === updated.id ? updated : n)));
-      pushToast("Note updated", "success");
-      closeEdit();
-    } catch {
-      pushToast("Update failed", "error");
-    }
+    const res = await fetch(`${backend}/notes/${editingId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        title: editTitle,
+        content: editContent,
+        category: editCategory,
+      }),
+    });
+
+    if (!res.ok) return pushToast("Update failed", "error");
+
+    const updated = await res.json();
+
+    setNotes((prev) => prev.map((n) => (n.id === updated.id ? updated : n)));
+
+    pushToast("Note updated", "success");
+    closeEdit();
+  } catch {
+    pushToast("Update failed", "error");
   }
+}
 
-  async function togglePin(n: Note) {
-    try {
-      const res = await fetch(`${backend}/notes/${n.id}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ isPinned: !n.isPinned }),
-      });
 
-      const updated = await res.json();
-      setNotes((prev) =>
-        prev.map((note) => (note.id === updated.id ? updated : note))
-      );
-      pushToast(n.isPinned ? "Unpinned" : "Pinned", "info");
-    } catch {
-      pushToast("Pin failed", "error");
+async function togglePin(n: Note) {
+  try {
+    const token = localStorage.getItem("token");
+
+    const res = await fetch(`${backend}/notes/${n.id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ isPinned: !n.isPinned }),
+    });
+
+    if (!res.ok) {
+      pushToast("Pin update failed", "error");
+      return;
     }
+
+    const updated = await res.json();
+
+    setNotes((prev) =>
+      prev.map((note) => (note.id === updated.id ? updated : note))
+    );
+
+    pushToast(updated.isPinned ? "Pinned" : "Unpinned", "info");
+  } catch {
+    pushToast("Pin failed", "error");
   }
+}
+
 
   const filtered = useMemo(() => {
     let result = [...notes];

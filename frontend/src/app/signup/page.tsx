@@ -22,12 +22,8 @@ export default function SignupPage() {
     if (res.ok) {
       router.push("/login");
     } else {
-<<<<<<< HEAD
-      alert("Signup failed");
-=======
-      const errorData = await res.json();
-      alert(errorData.message || "Signup failed");
->>>>>>> 7a3cd9cdc4e2c4ba97ec03aee0296bb33603a26a
+        const errorData = await res.json()
+      alert(errorData.message || "SignUp failed");
     }
   }
 
@@ -35,7 +31,7 @@ export default function SignupPage() {
     <div className="flex items-center justify-center min-h-screen bg-yellow-50">
       <div className="bg-white p-10 rounded-2xl shadow-xl w-full max-w-md border border-yellow-200">
         <h2 className="text-3xl font-bold text-gray-800 text-center mb-6">
-          Create Account
+          Create Account ✨
         </h2>
         <p className="text-center text-gray-500 mb-8">
           Start your journey with us
