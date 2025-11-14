@@ -15,7 +15,7 @@ import { User } from './interfaces/user.interface';
 export class AuthService {
   private dataPath = join(process.cwd(), 'data', 'users.json');
   private users: User[] = [];
-  private jwtSecret = process.env.JWT_SECRET || 'your_jwt_secret'; // set env in production
+  private jwtSecret = process.env.JWT_SECRET || ''; 
 
   constructor() {
     this.loadFromFile().catch(() => this.saveToFile());
@@ -71,7 +71,7 @@ export class AuthService {
     return { token, user: { id: user.id, email: user.email } };
   }
 
-  // helper to verify token (used by simple middleware below)
+ 
   verifyToken(token: string) {
     try {
       return jwt.verify(token, this.jwtSecret) as any;

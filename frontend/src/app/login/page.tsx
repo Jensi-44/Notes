@@ -28,10 +28,10 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-white">
+    <div className="flex items-center justify-center min-h-screen bg-yellow-50">
       <div className="bg-white p-10 rounded-2xl shadow-xl w-full max-w-md border border-yellow-200">
         <h2 className="text-3xl font-bold text-gray-800 text-center mb-6">
-          Welcome Back 
+          Welcome Back 👋
         </h2>
         <p className="text-center text-gray-500 mb-8">
           Login to continue
