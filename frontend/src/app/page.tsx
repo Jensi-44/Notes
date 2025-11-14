@@ -46,10 +46,10 @@ export default function Home() {
   const router = useRouter();
 
   function logout() {
-  localStorage.removeItem("token");
-  localStorage.removeItem("userId");
-  router.push("/login");
-}
+    localStorage.removeItem("token");
+    localStorage.removeItem("userId");
+    router.push("/login");
+  }
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -427,12 +427,12 @@ export default function Home() {
           </motion.div>
         ))}
 
-         <button
-      onClick={logout}
-      className="px-4 py-2 bg-red-500 text-white rounded-lg shadow hover:bg-red-600"
-    >
-      Logout
-    </button>
+        <button
+          onClick={logout}
+          className="px-4 py-2 bg-red-500 text-white rounded-lg shadow hover:bg-red-600"
+        >
+          Logout
+        </button>
       </div>
     </main>
   );
