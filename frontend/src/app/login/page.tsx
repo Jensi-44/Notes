@@ -1,7 +1,7 @@
 "use client";
-
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+
 const backend = "http://localhost:3001";
 
 export default function LoginPage() {
@@ -11,39 +11,38 @@ export default function LoginPage() {
 
   async function submit(e: any) {
     e.preventDefault();
-    const res = await fetch(`${backend}/auth/login`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
-    });
+    try {
+      const res = await fetch(`${backend}/auth/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
 
-    if (res.ok) {
-      const data = await res.json();
-      localStorage.setItem("token", data.token);
-      localStorage.setItem("userId", data.user.id);
-      router.push("/");
-    } else {
-        const errorData = await res.json()
-      alert(errorData.message || "Login failed");
+      if (res.ok) {
+        const data = await res.json();
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("userId", data.user.id);
+        router.push("/");
+      } else {
+        const errorData = await res.json();
+        alert(errorData.message || "Login failed");
+      }
+    } catch (err) {
+      alert("Network error — please try again.");
+      console.error(err);
     }
   }
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-yellow-50">
       <div className="bg-white p-10 rounded-2xl shadow-xl w-full max-w-md border border-yellow-200">
-        <h2 className="text-3xl font-bold text-gray-800 text-center mb-6">
-          Welcome Back 
-        </h2>
-        <p className="text-center text-gray-500 mb-8">
-          Login to continue
-        </p>
+        <h2 className="text-3xl font-bold text-gray-800 text-center mb-6">Welcome Back</h2>
+        <p className="text-center text-gray-500 mb-8">Login to continue</p>
 
         <form onSubmit={submit} className="space-y-5">
           {/* Email */}
           <div>
-            <label className="block mb-1 font-medium text-gray-700">
-              Email
-            </label>
+            <label className="block mb-1 font-medium text-gray-700">Email</label>
             <input
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -55,9 +54,7 @@ export default function LoginPage() {
 
           {/* Password */}
           <div>
-            <label className="block mb-1 font-medium text-gray-700">
-              Password
-            </label>
+            <label className="block mb-1 font-medium text-gray-700">Password</label>
             <input
               value={password}
               onChange={(e) => setPassword(e.target.value)}

@@ -22,5 +22,11 @@
     "email": "jensi.kachhadiya119454@marwadiuniversity.ac.in",
     "password": "$2b$10$uDj1gkq8YrgV1G/ARtkXDuSswyg4O/e/1rDVnhwPh/d5y/TznHF.i",
     "createdAt": "2025-11-14T11:57:54.735Z"
+  },
+  {
+    "id": "0ac1b151-ba22-4afb-b78e-0f964023ac86",
+    "email": "j44@gmail.com",
+    "password": "$2b$10$9HLZ3r2OdXsG4N9OrJkJ3.9xxXEnojiUg1CeeCyvXuIXgqTGT0ra6",
+    "createdAt": "2025-11-17T04:07:41.743Z"
   }
 ]
