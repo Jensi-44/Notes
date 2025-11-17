@@ -3,7 +3,11 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-const backend = "http://localhost:3001";
+const backend =
+  process.env.NEXT_PUBLIC_API_URL || " https://notes-e5ln.onrender.com";
+
+console.log("ENV Backend URL:", process.env.NEXT_PUBLIC_API_URL);
+console.log("Backend used:", backend);
 
 export default function SignupPage() {
   const [email, setEmail] = useState("");
@@ -34,7 +38,7 @@ export default function SignupPage() {
   return (
     <div className="flex items-center justify-center min-h-screen bg-yellow-50">
       <div className="bg-white p-10 rounded-2xl shadow-xl w-full max-w-md border border-yellow-200">
-        <h2 className="text-3xl font-bold text-gray-800 text-center mb-6">Create Account ✨</h2>
+        <h2 className="text-3xl font-bold text-gray-800 text-center mb-6">Create Account</h2>
         <p className="text-center text-gray-500 mb-8">Start your journey with us</p>
 
         <form onSubmit={submit} className="space-y-5">

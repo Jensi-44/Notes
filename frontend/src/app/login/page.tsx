@@ -2,7 +2,13 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-const backend = "http://localhost:3001";
+
+
+const backend =
+  process.env.NEXT_PUBLIC_API_URL || " https://notes-e5ln.onrender.com";
+
+console.log("ENV Backend URL:", process.env.NEXT_PUBLIC_API_URL);
+console.log("Backend used:", backend);
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
